@@ -2922,6 +2922,7 @@ section.fd.flex#container_single {
     border-radius: 20px;
     border: 1px solid #f5ae45;
     background: #2a406c;
+    display: flex;
 }
 
 .final-form form>label {
