@@ -2918,15 +2918,35 @@ section.fd.flex#container_single {
     height: max-content;
     min-height: 500px;
     width: 70%;
-    padding: 3vw;
     border-radius: 20px;
     border: 1px solid #f5ae45;
-    background: #2a406c;
+    overflow: hidden;
     display: flex;
+    background: linear-gradient(270deg, rgba(42,64,108,1) 39%, rgba(255,255,255,0) 100%);
 }
 
-.final-form form>label {
+.final-form>div>h2, .final-form>div>form {
+    width: 50%;
+    padding: 3vw;
+}
+
+.final-form>div>h2 {
+    font-family: 'Montserrat';
+}
+
+.final-form>div>h2 span {
+    font-family: 'Montserrat-Bold';
+}
+
+.final-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.final-form form>label, .final-form form>input {
     width: 100%;
+    flex: 1;
 }
 
 .final-form form input {
@@ -2934,6 +2954,10 @@ section.fd.flex#container_single {
     margin-bottom: 2%;
     border-radius: 6px;
     border: 1px solid #f5ae45;
+}
+
+.final-form form label input {
+    height: 100%;
 }
 
 .final-form .label-form-contact-hidden {
