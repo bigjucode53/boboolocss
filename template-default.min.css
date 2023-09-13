@@ -3114,6 +3114,7 @@ section.fd.flex#container_single {
 
 /* {# Slider #} */
 #categorie_dynamique .sliderChantier {
+    position: relative;
     padding: 8vw 0;
     background: url('http://localhost:8888/Boboolo/wp-content/uploads/2023/06/motif_fond_clair.png') no-repeat center / cover, rgba(23, 34, 60, 1);
     display: flex;
@@ -3126,9 +3127,40 @@ section.fd.flex#container_single {
     padding: 0;
 }
 
-#categorie_dynamique .sliderChantier ul {
+#categorie_dynamique .sliderChantier>section {
     width: 80%;
-    overflow: scroll;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#categorie_dynamique .sliderChantier>section:-webkit-scrollbar, #categorie_dynamique .sliderChantier>section::-webkit-scrollbar-thumb, #categorie_dynamique .sliderChantier>section::-webkit-scrollbar-track {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+#categorie_dynamique .sliderChantier>button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 50px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+#categorie_dynamique .sliderChantier>button:first-child {
+    left: 4%;
+}
+#categorie_dynamique .sliderChantier>button:last-child {
+    right: 4%;
+}
+
+#categorie_dynamique .sliderChantier ul {
     display: flex;
     justify-content: flex-start;
     align-items: center;
