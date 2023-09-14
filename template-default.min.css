@@ -3070,6 +3070,7 @@ section.fd.flex#container_single {
 }
 
 #categorie_dynamique .level0 article {
+    min-height: 200px;
     padding: 1vw 1vw 2vw;
     justify-content: flex-start !important;
 }
