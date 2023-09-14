@@ -2665,6 +2665,7 @@ div.leaflet-map {
 
 .slid-chantier {
     position: relative;
+    height: 100%
 }
 
 .chantier button {
@@ -2996,13 +2997,30 @@ section.fd.flex#container_single {
 }
 
 /* {# Section Catégories #} */
-#categorie_dynamique h2 {
+#categorie_dynamique .brochure h2 {
     width: 100%;
     margin-bottom: 1vw;
+    margin-top: 1vw;;
     text-align: left;
     font: 2vw sans-serif;
-    color: black;
+    font: 700 4.9rem/4.3rem "Montserrat-Ultra", sans-serif;
 }
+#categorie_dynamique .brochure span {
+color:#423c63;
+}
+#categorie_dynamique .brochure p {
+    color:#423c63;
+    font: 700 1.9rem/4.3rem "Montserrat-black", sans-serif;
+    }
+#categorie_dynamique .brochure a {
+        font: 700 1.1rem/4.3rem "Montserrat-black", sans-serif;
+        background: #15213c;
+        padding: 1vw;
+        border-radius: 6px;
+        color:white;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
 
 #categorie_dynamique>section:not(.final)>section>article {
     flex: 1;
