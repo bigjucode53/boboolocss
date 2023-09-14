@@ -1940,6 +1940,7 @@ header#header.dropdown:after {
 /*  .banniere_acceuil*/
 .banniere_acceuil {
     height: 90vh;
+    min-height: 500px;
     margin-bottom: 4%
 }
 
@@ -2388,6 +2389,17 @@ header#header.dropdown:after {
     margin-left: 5%;
 }
 
+#categorie_dynamique .chantier-bottom {
+    padding: .3vw;
+    align-items: flex-start;
+    gap: .7vw;
+}
+
+#categorie_dynamique .chantier-bottom * {
+    margin: 0;
+    padding: 0;
+}
+
 .avis_number {
     margin-left: 5%;
 }
@@ -2626,6 +2638,7 @@ div.leaflet-map {
 
 .banniere_categorie {
     height: 30vh;
+    min-height: 400px;
 }
 
 #interactive-map.leaflet-touch .leaflet-bar {
@@ -2665,7 +2678,7 @@ div.leaflet-map {
 
 .slid-chantier {
     position: relative;
-    height: 100%
+    height: 100%;
 }
 
 .chantier button {
@@ -2682,6 +2695,7 @@ div.leaflet-map {
 
 .chantier button.prev {
     left: 0;
+    margin: 0;
 }
 
 .chantier button.next {
@@ -2923,10 +2937,11 @@ section.fd.flex#container_single {
     border: 1px solid #f5ae45;
     overflow: hidden;
     display: flex;
-    background: linear-gradient(270deg, rgba(42,64,108,1) 39%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(270deg, rgba(42, 64, 108, 1) 39%, rgba(255, 255, 255, 0) 100%);
 }
 
-.final-form>div>h2, .final-form>div>form {
+.final-form>div>h2,
+.final-form>div>form {
     width: 50%;
     padding: 3vw;
 }
@@ -2945,7 +2960,8 @@ section.fd.flex#container_single {
     gap: 1vw;
 }
 
-.final-form form>label, .final-form form>input {
+.final-form form>label,
+.final-form form>input {
     width: 100%;
     flex: 1;
 }
@@ -2977,7 +2993,7 @@ section.fd.flex#container_single {
 
 #categorie_dynamique .level0 {
     position: relative;
-    top: -50%;
+    top: -130px;
 }
 
 #categorie_dynamique>section>section {
@@ -2997,30 +3013,36 @@ section.fd.flex#container_single {
 }
 
 /* {# Section Catégories #} */
-#categorie_dynamique .brochure h2 {
+#categorie_dynamique h2 {
     width: 100%;
     margin-bottom: 1vw;
-    margin-top: 1vw;;
     text-align: left;
     font: 2vw sans-serif;
+    color: black;
+}
+
+#categorie_dynamique .brochure h2 {
     font: 700 4.9rem/4.3rem "Montserrat-Ultra", sans-serif;
 }
+
 #categorie_dynamique .brochure span {
-color:#423c63;
-}
-#categorie_dynamique .brochure p {
     color:#423c63;
+}
+
+#categorie_dynamique .brochure p {
+    color: #423c63;
     font: 700 1.9rem/4.3rem "Montserrat-black", sans-serif;
-    }
+}
+
 #categorie_dynamique .brochure a {
-        font: 700 1.1rem/4.3rem "Montserrat-black", sans-serif;
-        background: #15213c;
-        padding: 1vw;
-        border-radius: 6px;
-        color:white;
-        text-decoration: none;
-        text-transform: uppercase;
-    }
+    font: 700 1.1rem/4.3rem "Montserrat-black", sans-serif;
+    background: #15213c;
+    padding: 1vw;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
 
 #categorie_dynamique>section:not(.final)>section>article {
     flex: 1;
@@ -3044,6 +3066,37 @@ color:#423c63;
     width: 20px;
     border-radius: 50%;
     background: #edeef1;
+    display: flex;
+}
+
+#categorie_dynamique .level0 article {
+    padding: 1vw 1vw 2vw;
+    justify-content: flex-start !important;
+}
+
+#categorie_dynamique>section.level0>section>article:not(.active) {
+    box-shadow: 0px 0px 0px transparent !important;
+    border: 4px solid #00000042;
+}
+
+#categorie_dynamique>section.level0>section>article.active {
+    border: 4px solid #f1bb5a;
+}
+
+#categorie_dynamique section.level0 article:not(active):after {
+    position: absolute;
+    top: 100%;
+    transform: translateY(-50%);
+    height: 30px;
+    width: 30px;
+    display: none;
+}
+
+#categorie_dynamique .level0 article.active:after {
+    position: absolute;
+    top: 100%;
+    transform: translateY(-50%);
+    background: #f1bb5a;
     display: flex;
 }
 
@@ -3140,14 +3193,15 @@ color:#423c63;
     align-items: center;
 }
 
-#categorie_dynamique .sliderChantier * {
+#categorie_dynamique .sliderChantier ul {
     margin: 0;
     padding: 0;
+    transition: all .3s;
 }
 
 #categorie_dynamique .sliderChantier>section {
     width: 80%;
-    overflow-y: scroll;
+    overflow-y: hidden;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -3155,7 +3209,9 @@ color:#423c63;
     -ms-overflow-style: none;
 }
 
-#categorie_dynamique .sliderChantier>section:-webkit-scrollbar, #categorie_dynamique .sliderChantier>section::-webkit-scrollbar-thumb, #categorie_dynamique .sliderChantier>section::-webkit-scrollbar-track {
+#categorie_dynamique .sliderChantier>section:-webkit-scrollbar,
+#categorie_dynamique .sliderChantier>section::-webkit-scrollbar-thumb,
+#categorie_dynamique .sliderChantier>section::-webkit-scrollbar-track {
     width: 0;
     height: 0;
     display: none;
@@ -3171,9 +3227,11 @@ color:#423c63;
     background: none;
     cursor: pointer;
 }
+
 #categorie_dynamique .sliderChantier>button:first-child {
     left: 4%;
 }
+
 #categorie_dynamique .sliderChantier>button:last-child {
     right: 4%;
 }
@@ -3189,6 +3247,7 @@ color:#423c63;
     height: 330px;
     width: 24%;
     min-width: 260px;
+    margin: 0;
 }
 
 /* {# Brochure #} */
