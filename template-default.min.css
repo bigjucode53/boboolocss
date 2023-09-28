@@ -342,6 +342,10 @@ caption {
     font-style: italic
 }
 
+body a {
+    text-decoration: none;
+}
+
 /* 
 .main_container {
     padding: 3rem 0
@@ -877,8 +881,13 @@ header#header.dropdown:after {
     margin: 0;
 }
 
-.form-dropdown .submit_form {
+.form-dropdown .wpcf7-submit {
     background: #f5a519;
+    font-family: 'Montserrat-Bold';
+}
+
+.form-dropdown form label {
+    width: 100%;
 }
 
 #nav_main .drop .form-dropdown>* {
@@ -2288,6 +2297,10 @@ header#header.dropdown:after {
 
 }
 
+.formulaire_contact form {
+    flex-direction: column;
+}
+
 .label-form-contact {
     height: 35px;
     margin-bottom: 5%;
@@ -2389,15 +2402,23 @@ header#header.dropdown:after {
     margin-left: 5%;
 }
 
-#categorie_dynamique .chantier-bottom {
+#content .chantier-bottom {
     padding: .3vw;
     align-items: flex-start;
     gap: .7vw;
 }
 
-#categorie_dynamique .chantier-bottom * {
+#content .chantier-bottom * {
     margin: 0;
     padding: 0;
+}
+
+
+#content .chantier-bottom hr {
+    width: 100%;
+    height: 1px;
+    border: 0;
+    background: #d8d8d8;
 }
 
 .avis_number {
@@ -2418,20 +2439,22 @@ header#header.dropdown:after {
     margin-bottom: 5%;
 }
 
-.current {
-    display: flex;
+.pagination .current {
     width: 4%;
     height: 25px;
-    justify-content: center;
-    align-items: center;
     margin-left: 15px;
     color: white;
+    font-family: 'Montserrat-Bold';
     background-color: #f59b02;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pagination a {
     text-decoration: none;
     font-weight: 500;
+    font-family: 'Montserrat-Bold';
 }
 
 .pagination .page {
@@ -2441,6 +2464,7 @@ header#header.dropdown:after {
     justify-content: center;
     align-items: center;
     margin-left: 15px;
+    color: black;
 }
 
 .next {
@@ -2669,6 +2693,7 @@ div.leaflet-map {
     background: #fbfbfb;
     cursor: pointer;
     list-style: none;
+    /* overflow: hidden; */
 }
 
 .chantier:hover {
@@ -2681,10 +2706,11 @@ div.leaflet-map {
     height: 100%;
 }
 
-.chantier button {
+.chantier-top button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 1;
     height: 30px;
     width: 30px;
     color: orange;
@@ -2693,22 +2719,27 @@ div.leaflet-map {
     background: white;
 }
 
-.chantier button.prev {
+.chantier-top button.prev {
     left: 0;
     margin: 0;
 }
 
-.chantier button.next {
+.chantier-top button.next {
     right: 0;
 }
 
-.chantier:hover button {
+.chantier-top:hover button {
     opacity: 1;
 }
 
-.chantier .images-chantier {
+.slid-chantier>div {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.images-chantier {
     justify-content: flex-start;
-    overflow-y: scroll;
+    transition: all .3s;
 }
 
 .chantier-top {
@@ -2992,8 +3023,11 @@ section.fd.flex#container_single {
 }
 
 #categorie_dynamique .level0 {
-    position: relative;
-    top: -130px;
+    transition: all .3s;
+}
+
+#categorie_dynamique .level0.click {
+    transform: translateY(-130px);
 }
 
 #categorie_dynamique>section>section {
@@ -3021,43 +3055,42 @@ section.fd.flex#container_single {
     color: black;
 }
 
-#categorie_dynamique .brochure h2 {
-    font: 700 4.9rem/4.3rem "Montserrat-Ultra", sans-serif;
-}
-
-#categorie_dynamique .brochure span {
-    color: #423c63;
-}
-
-#categorie_dynamique .brochure p {
-    color: #423c63;
-    font: 700 1.9rem/4.3rem "Montserrat-black", sans-serif;
-}
-
-#categorie_dynamique .brochure a {
-    font: 700 1.1rem/4.3rem "Montserrat-black", sans-serif;
-    background: #15213c;
-    padding: 1vw;
-    border-radius: 6px;
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
+#categorie_dynamique>section:not(.final, .level0)>section>article {
+    background-position: top center;
+    background-size: 60% 50%;
+    background-repeat: no-repeat;
+    padding: calc(2% + 80px) 1vw 1vw;
 }
 
 #categorie_dynamique>section:not(.final)>section>article {
     flex: 1;
-    padding: 1vw;
+    min-width: 140px;
+    font-family: 'Montserrat-Bold';
     text-align: center;
     text-transform: uppercase;
     border-radius: 10px;
     border: .2vw solid transparent;
-    background: white;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
     gap: 1vw;
     cursor: pointer;
+}
+
+#categorie_dynamique>section section {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 #categorie_dynamique>section:not(.final)>section>article:after {
@@ -3102,21 +3135,25 @@ section.fd.flex#container_single {
 }
 
 #categorie_dynamique>section:not(.final)>section>article:not(.active) {
-    box-shadow: -2px 0px 1px #bbbbbb, 1px 0px 1px white
+    box-shadow: -2px 0px 1px #dbd7d7, 1px 0px 1px white
 }
 
 #categorie_dynamique>section>section>article.active {
     border: .2vw solid #f1bb5a;
-    background: #f5ebde;
+    background-color: #f5ebde;
 }
 
 #categorie_dynamique>section>section>article.active:after {
-    background: #f1bb5a
+    background-color: #f1bb5a
 }
 
 #categorie_dynamique .final {
     gap: 1vw;
 }
+
+/* #categorie_dynamique .concCard {
+    overflow: hidden;
+} */
 
 #categorie_dynamique .category img {
     height: 80px;
@@ -3133,7 +3170,7 @@ section.fd.flex#container_single {
 #categorie_dynamique .final .discover,
 #categorie_dynamique .final .newsletter,
 #categorie_dynamique .final .description,
-#categorie_dynamique .final .tag {
+#categorie_dynamique .final .tags {
     width: 80%;
 }
 
@@ -3145,7 +3182,7 @@ section.fd.flex#container_single {
 #categorie_dynamique .newsletter {
     min-height: 200px;
     width: 100%;
-    padding: 1vw;
+    padding: 1vw 2vw;
     border-radius: 0.7vw;
     background: url('http://localhost:8888/Boboolo/wp-content/uploads/2023/06/motif_fond_clair.png') no-repeat center / cover, linear-gradient(232deg, rgba(22, 33, 60, 1) 0%, rgba(31, 49, 86, 1) 50%, rgba(22, 33, 60, 1) 100%);
     display: flex;
@@ -3155,6 +3192,7 @@ section.fd.flex#container_single {
 
 #categorie_dynamique .newsletter h3 {
     color: white;
+    text-align: center;
 }
 
 #categorie_dynamique .newsletter input[type='submit'] {
@@ -3185,7 +3223,7 @@ section.fd.flex#container_single {
 }
 
 /* {# Slider #} */
-#categorie_dynamique .sliderChantier {
+#content .sliderChantier {
     position: relative;
     padding: 8vw 0;
     background: url('http://localhost:8888/Boboolo/wp-content/uploads/2023/06/motif_fond_clair.png') no-repeat center / cover, rgba(23, 34, 60, 1);
@@ -3194,15 +3232,15 @@ section.fd.flex#container_single {
     align-items: center;
 }
 
-#categorie_dynamique .sliderChantier ul {
+#content .sliderChantier ul {
     margin: 0;
     padding: 0;
     transition: all .3s;
 }
 
-#categorie_dynamique .sliderChantier>section {
+#content .sliderChantier>section {
     width: 80%;
-    overflow-y: hidden;
+    overflow-x: hidden;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -3210,15 +3248,15 @@ section.fd.flex#container_single {
     -ms-overflow-style: none;
 }
 
-#categorie_dynamique .sliderChantier>section:-webkit-scrollbar,
-#categorie_dynamique .sliderChantier>section::-webkit-scrollbar-thumb,
-#categorie_dynamique .sliderChantier>section::-webkit-scrollbar-track {
+#content .sliderChantier>section:-webkit-scrollbar,
+#content .sliderChantier>section::-webkit-scrollbar-thumb,
+#content .sliderChantier>section::-webkit-scrollbar-track {
     width: 0;
     height: 0;
     display: none;
 }
 
-#categorie_dynamique .sliderChantier>button {
+#content .sliderChantier>button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -3229,22 +3267,22 @@ section.fd.flex#container_single {
     cursor: pointer;
 }
 
-#categorie_dynamique .sliderChantier>button:first-child {
+#content .sliderChantier>button:first-child {
     left: 4%;
 }
 
-#categorie_dynamique .sliderChantier>button:last-child {
+#content .sliderChantier>button:last-child {
     right: 4%;
 }
 
-#categorie_dynamique .sliderChantier ul {
+#content .sliderChantier ul {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 2vw;
 }
 
-#categorie_dynamique .sliderChantier .chantier {
+#content .sliderChantier .chantier {
     height: 330px;
     width: 24%;
     min-width: 260px;
@@ -3252,21 +3290,21 @@ section.fd.flex#container_single {
 }
 
 /* {# Brochure #} */
-#categorie_dynamique .brochure {
+#content .brochure {
     padding: 4vw 0;
     background: url('http://localhost:8888/Boboolo/wp-content/uploads/2023/06/Capture-decran-2023-06-20-a-14.58.40.png') no-repeat center / cover, #f5ebe1;
     justify-content: space-evenly;
 }
 
-#categorie_dynamique .brochure>* {
+#content .brochure>* {
     width: 30%;
 }
 
-#categorie_dynamique .brochure .imgbro {
+#content .brochure .imgbro {
     position: relative;
 }
 
-#categorie_dynamique .brochure .imgbro:after {
+#content .brochure .imgbro:after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -3281,8 +3319,46 @@ section.fd.flex#container_single {
     background-size: cover;
 }
 
+#content .brochure h2 {
+    color: #f5a83d;
+    font: 700 4.9rem/4.3rem "Montserrat-Ultra", sans-serif;
+}
+
+#content .brochure span {
+    color: #423c63;
+}
+
+#content .brochure p {
+    color: #423c63;
+    font: 700 1.9rem/4.3rem "Montserrat-black", sans-serif;
+}
+
+#content .brochure a {
+    font: 700 1.1rem/4.3rem "Montserrat-black", sans-serif;
+    background: #15213c;
+    padding: 1vw;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.brochure form {
+    flex-direction: column;
+}
+
+.brochure .wpcf7 input {
+    width: 60%;
+    margin: 0 auto 0 0;
+}
+
+.brochure .wpcf7 input[type='submit'] {
+    color: white;
+    background-color: #17223c;
+}
+
 /* {# Faq #} */
-#categorie_dynamique .faq {
+#content .faq {
     width: 60%;
     display: flex;
     justify-content: center;
@@ -3290,11 +3366,11 @@ section.fd.flex#container_single {
     flex-direction: column;
 }
 
-#categorie_dynamique .faq h2 {
+#content .faq h2 {
     text-align: center;
 }
 
-#categorie_dynamique .faq details {
+#content .faq details {
     position: relative;
     width: 100%;
     padding: 1vw 2vw;
@@ -3306,32 +3382,32 @@ section.fd.flex#container_single {
     gap: 1vw;
 }
 
-#categorie_dynamique .faq summary {
+#content .faq summary {
     list-style-type: none;
     font-weight: 600;
     display: flex;
     justify-content: space-between;
 }
 
-#categorie_dynamique .faq summary:after {
+#content .faq summary:after {
     content: '+';
 }
 
-#categorie_dynamique details[open] .faq summary:after {
+#content .faq details[open] summary:after {
     content: 'x';
 }
 
-#categorie_dynamique .faq details aside {
+#content .faq details aside {
     margin-top: 1vw;
     font-weight: 100;
 }
 
-#categorie_dynamique .faq details>*:not(span) {
+#content .faq details>*:not(span) {
     position: relative;
     z-index: 1;
 }
 
-#categorie_dynamique .faq span {
+#content .faq span {
     position: absolute;
     top: 0;
     left: 0;
@@ -3459,7 +3535,7 @@ section.fd.flex#container_single {
     gap: 2vw;
 }
 
-.filtre-blog h3 {
+.page-blog .filtre-blog h3 {
     width: 100%;
     margin: 0 0 1vw 0;
     font: 500 1.7rem/2.9rem "Montserrat-Bold", sans-serif;
@@ -3518,6 +3594,30 @@ section.fd.flex#container_single {
 
 /* single caté */
 
+.start-single-cate>* {
+    width: 70%;
+}
+
+#single-cate {
+    background: #edeef2;
+}
+
+#single-cate .brochure {
+    width: 100%;
+    display: flex;
+}
+
+#single-cate .faq {
+    margin: 2vw auto;
+}
+
+#single-cate .faq h2 {
+    width: 100%;
+    margin-bottom: 1vw;
+    font: 2vw sans-serif;
+    color: black;
+}
+
 .container_repeteurc p {
     color: white;
 }
@@ -3569,7 +3669,6 @@ section.fd.flex#container_single {
 }
 
 .title_text {
-    width: 70%;
     padding-top: 10%;
     padding-bottom: 10%;
 }
@@ -3644,11 +3743,26 @@ section.fd.flex#container_single {
 }
 
 /* tag */
-.tags {
+#content section.tags {
     justify-content: flex-start;
-    flex-direction: inherit;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: .5vw;
+}
+
+:not(.filtre-blog)>.tags {
+    margin: 2vw 0;
+}
+
+.tags h3 {
+    width: 100%;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.contain-tag {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.6vw;
 }
 
 .tag-link {
@@ -3657,12 +3771,35 @@ section.fd.flex#container_single {
     border: .5px solid #dcd8d8;
     border-left-width: 2px;
     border-right-width: 0;
+    background: white;
     transition: all .3s;
 }
 
 .tag-link:hover {
     color: white;
     background-color: #17223c;
+}
+
+/* WPCF7 */
+
+.wpcf7-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5vw;
+}
+
+.wpcf7 * {
+    border: 0;
+}
+
+.wpcf7 input {
+    height: calc(30px + 1vw);
+    padding: 0.5vw 1vw;
+}
+
+.wpcf7 input[type='submit'] {
+    font-family: 'Montserrat-Bold';
 }
 
 .wpcf7 form.sent .wpcf7-response-output {
